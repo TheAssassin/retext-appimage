@@ -5,6 +5,9 @@ services:
   # needed for retext to run (which is needed to fetch the version number)
   - xvfb
 
+before_install:
+  - sudo apt-get install -y libdbus-1-3 libxkbcommon-x11-0
+
 matrix:
   include:
     - name: Python 3.6 (x86 cross)
