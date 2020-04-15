@@ -3,6 +3,12 @@
 set -e
 set -x
 
+if [ "$ARCH" == "" ]; then
+    echo "Error: \$ARCH not set"
+    echo "Please export \$ARCH to either x86_64 or i386 and try again"
+    exit 1
+fi
+
 # use RAM disk if possible
 if [ "$CI" == "" ] && [ -d /dev/shm ]; then
     TEMP_BASE=/dev/shm
