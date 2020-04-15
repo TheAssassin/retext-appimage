@@ -1,6 +1,10 @@
 dist: bionic
 language: python
 
+services:
+  # needed for retext to run (which is needed to fetch the version number)
+  - xvfb
+
 matrix:
   include:
     - name: Python 3.6 (x86 cross)
@@ -8,7 +12,7 @@ matrix:
       install:
         - sudo dpkg --add-architecture i386
         - sudo apt-get update
-        - sudo apt-get install -y libc6:i386 libstdc++6:i386 libffi6:i386 libgmp10:i386 zlib1g:i386 libfuse2:i386
+        - sudo apt-get install -y libc6:i386 libstdc++6:i386 libffi6:i386 libgmp10:i386 zlib1g:i386 libfuse2:i386 gcc-multilib
       script:
         - export ARCH=i386 APPIMAGE_EXTRACT_AND_RUN=1
         - bash -xe build.sh
