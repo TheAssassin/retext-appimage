@@ -42,7 +42,7 @@ wget https://github.com/retext-project/retext/raw/master/data/me.mitya57.ReText.
 wget https://github.com/retext-project/retext/raw/master/icons/retext.svg
 
 # set up a basic AppDir; we cannot finish the AppImage already since we need to find out the ReText version after installing it from PyPI
-export PIP_REQUIREMENTS="ReText pymdown-extensions"
+export PIP_REQUIREMENTS="ReText pymdown-extensions pyenchant"
 ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin conda
 
 # get a proper version number
