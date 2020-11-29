@@ -46,7 +46,7 @@ export PIP_REQUIREMENTS="ReText pymdown-extensions pyenchant"
 ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin conda
 
 # get a proper version number
-export VERSION=$(AppDir/usr/bin/python AppDir/usr/bin/retext --version | cut -d' ' -f2)
+export VERSION="$(cat AppDir/usr/bin/retext  | grep __requires__ | sed -r 's|.*ReText\s*==\s*([^'"'"']+).*|\1|')"
 
 # finish up AppDir and run the appimage plugin to create the final AppImage
 ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage -d me.mitya57.ReText.desktop -i retext.svg --custom-apprun "$REPO_ROOT"/AppRun.sh
