@@ -33,7 +33,7 @@ OLD_CWD=$(readlink -f .)
 pushd "$BUILD_DIR"
 
 # get linuxdeploy and its conda plugin
-wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-"$ARCH".AppImage
 wget https://github.com/linuxdeploy/linuxdeploy-plugin-conda/raw/master/linuxdeploy-plugin-conda.sh
 chmod +x linuxdeploy*
 
@@ -43,12 +43,12 @@ wget https://github.com/retext-project/retext/raw/master/icons/retext.svg
 
 # set up a basic AppDir; we cannot finish the AppImage already since we need to find out the ReText version after installing it from PyPI
 export PIP_REQUIREMENTS="ReText pymdown-extensions pyenchant"
-./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin conda
+./linuxdeploy-"$ARCH".AppImage --appdir AppDir --plugin conda
 
 # get a proper version number
 export VERSION="$(cat AppDir/usr/bin/retext  | grep __requires__ | sed -r 's|.*ReText\s*==\s*([^'"'"']+).*|\1|')"
 
 # finish up AppDir and run the appimage plugin to create the final AppImage
-./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage -d me.mitya57.ReText.desktop -i retext.svg --custom-apprun "$REPO_ROOT"/AppRun.sh
+./linuxdeploy-"$ARCH".AppImage --appdir AppDir --output appimage -d me.mitya57.ReText.desktop -i retext.svg --custom-apprun "$REPO_ROOT"/AppRun.sh
 
 mv ReText-*.AppImage "$OLD_CWD"
